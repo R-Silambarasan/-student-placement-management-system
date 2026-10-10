@@ -1,0 +1,62 @@
+spring:
+    application:
+        name: student_placement_management
+
+    datasource:
+        url: jdbc:mysql://localhost:3306/placement_db
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+        # HikariCP Connection Pool
+        hikari:
+            pool-name: PlacementHikariPool
+            maximum-pool-size: 10
+            minimum-idle: 5
+            connection-timeout: 30000
+            idle-timeout: 600000
+            max-lifetime: 1800000
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        properties:
+            hibernate:
+                format_sql: true
+        open-in-view: false
+
+# Server Configuration
+server:
+    port: 8080
+
+# Spring Boot Actuator
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,metrics
+    endpoint:
+        health:
+            show-details: always
+    info:
+        env:
+            enabled: true
+
+# Spring Security Debug Logging
+logging:
+    level:
+        org.springframework.security: DEBUG
+
+# JWT Configuration
+app:
+    jwt:
+        secret: cGxhY2VtZW50LWFwcC1kZXZlbG9wbWVudC1qd3Qtc2VjcmV0LWtleS0yMDI2
+        expiration-ms: 3600000
+
+# Application Information
+info:
+    app:
+        name: Student Placement Management System
+        description: Student placement and job drive management
+        version: 1.0.0
